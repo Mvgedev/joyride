@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2ss2gwb88fr"]
+[gd_scene load_steps=7 format=3 uid="uid://c2ss2gwb88fr"]
 
 [ext_resource type="Texture2D" uid="uid://c4vrikhv17vlh" path="res://assets/sprite/Missile.png" id="1_6cx5e"]
+[ext_resource type="Script" uid="uid://cx7x8wkov0f0t" path="res://scripts/missile.gd" id="1_35udt"]
 [ext_resource type="PackedScene" uid="uid://cd1ymsqih0ag7" path="res://scenes/killzone.tscn" id="2_35udt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2swxv"]
@@ -23,11 +24,14 @@ radius = 2.0
 height = 28.0
 
 [node name="Missile" type="Node2D"]
+script = ExtResource("1_35udt")
+metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bd00w")
 
 [node name="Killzone" parent="." instance=ExtResource("2_35udt")]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 rotation = 1.5707964

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://5ge2e7wu22vs"]
+[gd_scene load_steps=5 format=3 uid="uid://5ge2e7wu22vs"]
 
+[ext_resource type="Script" uid="uid://dp5g3xfwb2snr" path="res://scripts/missile_warning.gd" id="1_mvnof"]
 [ext_resource type="Texture2D" uid="uid://c32vakutvlyqh" path="res://assets/sprite/Warning.png" id="1_t31tr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvnof"]
@@ -18,6 +19,8 @@ animations = [{
 }]
 
 [node name="Missile Warning" type="Node2D"]
+script = ExtResource("1_mvnof")
+metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8twbt")

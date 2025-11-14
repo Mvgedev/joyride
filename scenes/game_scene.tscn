@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://k6ipuwviptmf"]
+[gd_scene load_steps=7 format=3 uid="uid://k6ipuwviptmf"]
 
 [ext_resource type="Texture2D" uid="uid://c0yng87jdr4hu" path="res://assets/sprite/bg_ground.png" id="1_onqr8"]
 [ext_resource type="PackedScene" uid="uid://bhell6isufwvh" path="res://scenes/player_character.tscn" id="1_w5aja"]
+[ext_resource type="Script" uid="uid://ca4x823pat04k" path="res://scripts/game_manager.gd" id="1_ycayy"]
+[ext_resource type="Script" uid="uid://clyuxkpo30lwg" path="res://scripts/hazard_manager.gd" id="2_bw6k5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
 b = Vector2(0, 307)
@@ -13,6 +15,10 @@ b = Vector2(714, 0)
 [node name="GameScene" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_ycayy")
+
+[node name="HazardManager" type="Node" parent="GameManager"]
+script = ExtResource("2_bw6k5")
 
 [node name="Landscape" type="Node" parent="."]
 
@@ -53,9 +59,13 @@ shape = SubResource("SegmentShape2D_w5aja")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Ceiling"]
 shape = SubResource("SegmentShape2D_w5aja")
 
+[node name="Hazards" type="Node" parent="."]
+
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(2, 2)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_w5aja")]
 position = Vector2(148, 293)
+
+[connection signal="area_entered" from="Borders/BorderLeft" to="GameManager" method="_on_border_left_area_entered"]

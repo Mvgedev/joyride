@@ -3,7 +3,7 @@ extends RigidBody2D
 #jetpack values
 var max_velocity = -300
 var max_downfall = 400
-@onready var gpu_particles_2d: GPUParticles2D = $GPUParticles2D
+@onready var gpu_particles_2d: CPUParticles2D = $CPUParticles2D
 
 enum EQUIPMENT {JETPACK, CLOUD, MOTO}
 

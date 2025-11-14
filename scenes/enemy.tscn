@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://u0mvqkunudvx"]
+[gd_scene load_steps=7 format=3 uid="uid://u0mvqkunudvx"]
 
+[ext_resource type="Script" uid="uid://ddvlsv5a3nfbc" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://cxfrw8ah20vo5" path="res://assets/sprite/Enemy.png" id="1_7p1mj"]
 [ext_resource type="PackedScene" uid="uid://cd1ymsqih0ag7" path="res://scenes/killzone.tscn" id="2_md0e3"]
 
@@ -22,11 +23,14 @@ animations = [{
 radius = 14.035668
 
 [node name="Enemy" type="Node2D"]
+script = ExtResource("1_4ra3w")
+metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4ra3w")
 
 [node name="Killzone" parent="." instance=ExtResource("2_md0e3")]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("CircleShape2D_4ra3w")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://glftydw8buuf"]
+[gd_scene load_steps=7 format=3 uid="uid://glftydw8buuf"]
 
 [ext_resource type="Texture2D" uid="uid://xib48otgrg5" path="res://assets/sprite/Zapper.png" id="1_iivta"]
+[ext_resource type="Script" uid="uid://crhomen136pj3" path="res://assets/sprite/zapper.gd" id="1_tgqbo"]
 [ext_resource type="PackedScene" uid="uid://cd1ymsqih0ag7" path="res://scenes/killzone.tscn" id="2_rwb7l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rwb7l"]
@@ -19,16 +20,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tgqbo"]
-size = Vector2(14, 60)
+size = Vector2(61, 12)
 
 [node name="Zapper" type="Node2D"]
+script = ExtResource("1_tgqbo")
+metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tgqbo")
 
 [node name="Killzone" parent="." instance=ExtResource("2_rwb7l")]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(0, -4.5896954e-07)
-rotation = 1.5707964
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_tgqbo")

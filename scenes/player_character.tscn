@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhell6isufwvh"]
+[gd_scene load_steps=7 format=3 uid="uid://bhell6isufwvh"]
 
 [ext_resource type="Script" uid="uid://bid8cjmop308g" path="res://scripts/player_character.gd" id="1_6r27q"]
 [ext_resource type="Texture2D" uid="uid://bnrj6qiuv5f03" path="res://assets/sprite/character_sprite.png" id="1_56udc"]
@@ -24,17 +24,6 @@ radius = 13.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_6r27q"]
 radius = 14.035668
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6r27q"]
-particle_flag_disable_z = true
-emission_shape = 1
-emission_sphere_radius = 5.0
-spread = 0.0
-angular_velocity_min = -1.6093254e-05
-angular_velocity_max = -1.6093254e-05
-gravity = Vector3(0, 98, 0)
-scale_max = 3.0
-color = Color(1, 0.9098039, 0, 1)
-
 [node name="PlayerCharacter" type="RigidBody2D"]
 z_index = 5
 collision_layer = 2
@@ -55,14 +44,13 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_6r27q")
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(0, 13)
 emitting = false
-amount = 40
-lifetime = 1.5
-speed_scale = 2.0
-randomness = 0.3
-process_material = SubResource("ParticleProcessMaterial_6r27q")
+amount = 20
+emission_shape = 1
+emission_sphere_radius = 3.5
+spread = 60.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
