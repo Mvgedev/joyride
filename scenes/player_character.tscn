@@ -32,9 +32,11 @@ spread = 0.0
 angular_velocity_min = -1.6093254e-05
 angular_velocity_max = -1.6093254e-05
 gravity = Vector3(0, 98, 0)
+scale_max = 3.0
 color = Color(1, 0.9098039, 0, 1)
 
 [node name="PlayerCharacter" type="RigidBody2D"]
+z_index = 5
 collision_layer = 2
 mass = 0.5
 gravity_scale = 0.7
