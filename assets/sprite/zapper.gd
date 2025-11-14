@@ -6,7 +6,6 @@ func _ready() -> void:
 func rotation_spawn():
 	var rot = 0
 	var i = randi_range(0,3)
-	print("Valeur de i: " + str(i))
 	match i:
 		0:
 			pass
@@ -16,7 +15,6 @@ func rotation_spawn():
 			rot = 90
 		3:
 			rot = 35
-	print("Valeur de rot: " + str(rot))
 	global_rotation_degrees = rot
 	position.y = randf_range(45, 250)
 

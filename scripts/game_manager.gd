@@ -1,5 +1,8 @@
 extends Node
 
+
+@onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
+
 # Spawners
 @onready var border_right: Area2D = $"../Borders/BorderRight"
 
@@ -11,6 +14,7 @@ var missile_speed = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	color_rect.modulate.a = 0
 	spawn_hazard()
 	await get_tree().create_timer(1.3).timeout
 	spawn_hazard()
@@ -33,6 +37,9 @@ func rand_hazard() -> Node2D:
 func _process(delta: float) -> void:
 	pass
 
+func damage():
+	color_rect.modulate.a = 1
+	color_rect.create_tween().tween_property(color_rect, "modulate:a", 0.0, 0.2)
 
 func _on_border_left_area_entered(area: Area2D) -> void:
 	area.get_parent().queue_free()
