@@ -1,6 +1,12 @@
 extends Hazard
+class_name Enemy
 
 var offset_enemy = 10
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var collision_shape_2d: CollisionShape2D = $Killzone/CollisionShape2D
+
+var hit = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -10,3 +16,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	position.x -= game_manager.enemy_speed * delta
+
+func die():
+	animation_player.play("death")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://u0mvqkunudvx"]
+[gd_scene load_steps=10 format=3 uid="uid://u0mvqkunudvx"]
 
 [ext_resource type="Script" uid="uid://ddvlsv5a3nfbc" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://cxfrw8ah20vo5" path="res://assets/sprite/Enemy.png" id="1_7p1mj"]
@@ -22,6 +22,81 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ra3w"]
 radius = 14.035668
 
+[sub_resource type="Animation" id="Animation_4ra3w"]
+resource_name = "death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Killzone/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0, 0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_5uy6h"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Killzone/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4w8v"]
+_data = {
+&"RESET": SubResource("Animation_5uy6h"),
+&"death": SubResource("Animation_4ra3w")
+}
+
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_4ra3w")
 metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
@@ -30,7 +105,13 @@ metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 sprite_frames = SubResource("SpriteFrames_4ra3w")
 
 [node name="Killzone" parent="." instance=ExtResource("2_md0e3")]
+collision_layer = 9
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("CircleShape2D_4ra3w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c4w8v")
+}

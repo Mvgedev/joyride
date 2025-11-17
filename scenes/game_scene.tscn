@@ -3,10 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://c0yng87jdr4hu" path="res://assets/sprite/bg_ground.png" id="1_onqr8"]
 [ext_resource type="PackedScene" uid="uid://bhell6isufwvh" path="res://scenes/player_character.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://ca4x823pat04k" path="res://scripts/game_manager.gd" id="1_ycayy"]
-[ext_resource type="Script" uid="uid://clyuxkpo30lwg" path="res://scripts/hazard_manager.gd" id="2_bw6k5"]
+[ext_resource type="PackedScene" uid="uid://cg8oyakewarly" path="res://scenes/hazard_manager.tscn" id="2_bw6k5"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
-b = Vector2(0, 307)
+b = Vector2(0, 276)
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_w5aja"]
 a = Vector2(-113, 0)
@@ -17,8 +17,9 @@ b = Vector2(714, 0)
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("1_ycayy")
 
-[node name="HazardManager" type="Node" parent="GameManager"]
-script = ExtResource("2_bw6k5")
+[node name="HazardManager" parent="GameManager" instance=ExtResource("2_bw6k5")]
+
+[node name="SpawnTimer" type="Timer" parent="GameManager"]
 
 [node name="Landscape" type="Node" parent="."]
 
@@ -29,7 +30,7 @@ follow_viewport = false
 ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Landscape/Ground"]
-position = Vector2(288, 162)
+position = Vector2(288, 126)
 texture = ExtResource("1_onqr8")
 
 [node name="Borders" type="Node" parent="."]
@@ -47,7 +48,7 @@ position = Vector2(700, 0)
 shape = SubResource("SegmentShape2D_lxttp")
 
 [node name="Ground" type="StaticBody2D" parent="Borders"]
-position = Vector2(0, 310)
+position = Vector2(0, 276)
 collision_layer = 5
 collision_mask = 3
 
@@ -66,11 +67,12 @@ anchor_mode = 0
 zoom = Vector2(2, 2)
 
 [node name="PlayerCharacter" parent="." instance=ExtResource("1_w5aja")]
-position = Vector2(148, 293)
+position = Vector2(148, 259)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -78,4 +80,5 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.60784316)
 
+[connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
 [connection signal="area_entered" from="Borders/BorderLeft" to="GameManager" method="_on_border_left_area_entered"]

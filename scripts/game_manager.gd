@@ -1,6 +1,11 @@
 extends Node
 
 
+# Player
+@onready var player_character: RigidBody2D = $"../PlayerCharacter"
+
+
+# Flashing damage
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
 
 # Spawners
@@ -11,17 +16,15 @@ extends Node
 var zapper_speed = 70
 var enemy_speed = 110
 var missile_speed = 150
+@onready var spawn_timer: Timer = $SpawnTimer
+var spawn_delay = 2.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	player_character.connect("machine_gun_hit", machine_gun_hit)
 	color_rect.modulate.a = 0
-	spawn_hazard()
-	await get_tree().create_timer(1.3).timeout
-	spawn_hazard()
-	await get_tree().create_timer(1.3).timeout
-	spawn_hazard()
-	await get_tree().create_timer(1.3).timeout
-	spawn_hazard()
+	color_rect.visible = true
+	spawn_timer.start(spawn_delay)
 
 func spawn_hazard():
 	var hazard = hazard_manager.rand_hazard()
@@ -34,7 +37,7 @@ func rand_hazard() -> Node2D:
 	return null
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
 
 func damage():
@@ -43,4 +46,13 @@ func damage():
 
 func _on_border_left_area_entered(area: Area2D) -> void:
 	area.get_parent().queue_free()
+
+func machine_gun_hit(body):
+	if body != null:
+		body.collision_shape_2d.disabled = true
+		body.die()
+
+func _on_spawn_timer_timeout() -> void:
+	print("Timer off!")
 	spawn_hazard()
+	spawn_timer.start(spawn_delay)
