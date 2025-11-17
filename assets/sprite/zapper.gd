@@ -15,7 +15,7 @@ func rotation_spawn():
 			rot = 90
 		3:
 			rot = 35
-	global_rotation_degrees = rot
+	global_rotation_degrees = rot                 
 	position.y = randf_range(45, 250)
 
 func _process(delta: float) -> void:

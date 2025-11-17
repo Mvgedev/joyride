@@ -20,6 +20,7 @@ var on_ground = false
 var health = 3
 var shield = false
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
+@onready var invuln_timer: Timer = $InvulnTimer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,6 +71,9 @@ func damaged():
 		shield = false
 	else:
 		health -= 1
+	collision_shape_2d.disabled = true
+	invuln_timer.start(1)
+	
 	# Disable collision for 2 sec
 	# check if dead
 	
@@ -81,3 +85,7 @@ func _on_area_2d_body_entered(_body: Node2D) -> void:
 func _on_area_2d_body_exited(_body: Node2D) -> void:
 	on_ground = false
 	pass # Replace with function body.
+
+
+func _on_invuln_timer_timeout() -> void:
+	collision_shape_2d.disabled = false
