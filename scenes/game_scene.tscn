@@ -15,6 +15,7 @@ b = Vector2(714, 0)
 [node name="GameScene" type="Node2D"]
 
 [node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
 script = ExtResource("1_ycayy")
 
 [node name="HazardManager" parent="GameManager" instance=ExtResource("2_bw6k5")]
@@ -79,6 +80,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 0, 0, 0.60784316)
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.47400004
+offset_bottom = -0.024017334
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HP" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 0
+offset_right = 95.0
+offset_bottom = 45.0
+theme_override_font_sizes/font_size = 32
+text = "HP: 3"
 
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
 [connection signal="area_entered" from="Borders/BorderLeft" to="GameManager" method="_on_border_left_area_entered"]

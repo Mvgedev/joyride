@@ -1,5 +1,7 @@
 extends RigidBody2D
 
+@onready var game_manager: Node = %GameManager
+
 #jetpack values
 var max_velocity = -300
 var max_downfall = 400
@@ -19,6 +21,7 @@ var on_ground = false
 # Character stats
 var health = 3
 var shield = false
+var intangible = false
 @onready var collision_shape_2d: CollisionShape2D = $CollisionShape2D
 @onready var invuln_timer: Timer = $InvulnTimer
 
@@ -66,17 +69,20 @@ func process_jetpack():
 	elif linear_velocity.y > max_downfall:
 		linear_velocity.y = max_downfall
 
-func damaged():
-	if shield == true:
-		shield = false
-	else:
-		health -= 1
-	collision_shape_2d.disabled = true
-	invuln_timer.start(1)
-	
-	# Disable collision for 2 sec
-	# check if dead
-	
+func damaged() -> bool:
+	if intangible == false:
+		if shield == true:
+			shield = false
+		else:
+			health -= 1
+			game_manager.screen_shake()
+		if health < 1:
+			return true # Player is defeated
+		else:
+			intangible = true
+			invuln_timer.start(1.5)
+	return false
+
 
 func _on_area_2d_body_entered(_body: Node2D) -> void:
 	on_ground = true
@@ -86,6 +92,6 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 	on_ground = false
 	pass # Replace with function body.
 
-
 func _on_invuln_timer_timeout() -> void:
-	collision_shape_2d.disabled = false
+	print("Invuln off!")
+	intangible = false
