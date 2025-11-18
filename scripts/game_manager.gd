@@ -6,7 +6,7 @@ extends Node
 
 # GUI
 @onready var hp: Label = $"../CanvasLayer/Control/HP"
-
+@onready var game_over: Control = $"../CanvasLayer/Game Over"
 
 # Flashing damage
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
@@ -24,6 +24,7 @@ var spawn_delay = 2.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	game_over.connect("retry", retry)
 	player_character.connect("machine_gun_hit", machine_gun_hit)
 	update_hp()
 	color_rect.modulate.a = 0
@@ -45,12 +46,15 @@ func _process(_delta: float) -> void:
 	pass
 
 func damage():
-	var game_over = player_character.damaged()
-	if game_over == true:
+	var defeated = player_character.damaged()
+	if defeated == true:
 		end_game()
 	update_hp()
 
 func end_game():
+	game_over.visible = true
+
+func retry():
 	get_tree().reload_current_scene()
 
 

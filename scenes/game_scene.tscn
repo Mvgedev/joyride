@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://k6ipuwviptmf"]
+[gd_scene load_steps=8 format=3 uid="uid://k6ipuwviptmf"]
 
 [ext_resource type="Texture2D" uid="uid://c0yng87jdr4hu" path="res://assets/sprite/bg_ground.png" id="1_onqr8"]
 [ext_resource type="PackedScene" uid="uid://bhell6isufwvh" path="res://scenes/player_character.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://ca4x823pat04k" path="res://scripts/game_manager.gd" id="1_ycayy"]
 [ext_resource type="PackedScene" uid="uid://cg8oyakewarly" path="res://scenes/hazard_manager.tscn" id="2_bw6k5"]
+[ext_resource type="PackedScene" uid="uid://bebdgqjrowu0u" path="res://scenes/game_over.tscn" id="5_y3j0m"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
 b = Vector2(0, 276)
@@ -95,6 +96,9 @@ offset_right = 95.0
 offset_bottom = 45.0
 theme_override_font_sizes/font_size = 32
 text = "HP: 3"
+
+[node name="Game Over" parent="CanvasLayer" instance=ExtResource("5_y3j0m")]
+visible = false
 
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
 [connection signal="area_entered" from="Borders/BorderLeft" to="GameManager" method="_on_border_left_area_entered"]

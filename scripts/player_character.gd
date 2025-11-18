@@ -92,6 +92,7 @@ func _on_area_2d_body_exited(_body: Node2D) -> void:
 	on_ground = false
 	pass # Replace with function body.
 
+
 func _on_invuln_timer_timeout() -> void:
 	print("Invuln off!")
 	intangible = false

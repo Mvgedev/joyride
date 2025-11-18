@@ -1,0 +1,75 @@
+[gd_scene load_steps=5 format=3 uid="uid://bebdgqjrowu0u"]
+
+[ext_resource type="Script" uid="uid://8beobcjvtbry" path="res://scripts/game_over.gd" id="1_racf3"]
+[ext_resource type="Texture2D" uid="uid://dujyb7anuks45" path="res://assets/sprite/UI Box.png" id="1_xeevv"]
+[ext_resource type="Texture2D" uid="uid://c0arf0y8fsmoh" path="res://assets/sprite/Button_Normal.png" id="2_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://qjit2o2b8qi1" path="res://assets/sprite/Button_Pressed.png" id="3_racf3"]
+
+[node name="Game Over" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_racf3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_xeevv")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -93.5
+offset_top = 23.0
+offset_right = 93.5
+offset_bottom = 46.0
+grow_horizontal = 2
+text = "You have been defeated"
+horizontal_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -24.0
+offset_top = -52.0
+offset_right = 24.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("2_tbwuq")
+texture_pressed = ExtResource("3_racf3")
+
+[node name="Label" type="Label" parent="TextureRect/TextureButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -21.0
+offset_top = -1.0
+offset_right = 21.0
+offset_bottom = 22.0
+grow_horizontal = 2
+text = "Retry"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="TextureRect/TextureButton" to="." method="_on_texture_button_pressed"]
