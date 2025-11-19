@@ -5,8 +5,18 @@ extends Node
 @onready var player_character: RigidBody2D = $"../PlayerCharacter"
 
 # GUI
-@onready var hp: Label = $"../CanvasLayer/Control/HP"
 @onready var game_over: Control = $"../CanvasLayer/Game Over"
+@onready var ground: Parallax2D = $"../Landscape/Ground"
+@onready var score: Label = $"../CanvasLayer/Control/Score"
+@onready var best_score: Label = $"../CanvasLayer/Control/Best Score"
+
+# GUI HP
+@onready var heart_bar: HBoxContainer = $"../CanvasLayer/Control/Heart Bar"
+
+# Heart sprite
+const HEART = preload("uid://cyy6p2tpe0pg4")
+const EMPTY_HEART = preload("uid://nfdsab71iynd")
+
 
 # Flashing damage
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
@@ -52,6 +62,13 @@ func damage():
 	update_hp()
 
 func end_game():
+	player_character.explosion()
+	spawn_timer.stop()
+	zapper_speed = 0
+	enemy_speed = 0
+	missile_speed = 0
+	# Stop BG moving
+	ground.autoscroll = Vector2(0.0,0.0)
 	game_over.visible = true
 
 func retry():
@@ -59,7 +76,7 @@ func retry():
 
 
 func update_hp():
-	hp.text = "HP: " + str(player_character.health)
+	heart_bar.update_heart(player_character.health)
 
 func screen_shake():
 	color_rect.modulate.a = 1

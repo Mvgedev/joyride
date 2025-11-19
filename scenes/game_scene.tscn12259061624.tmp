@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cg8oyakewarly" path="res://scenes/hazard_manager.tscn" id="2_bw6k5"]
 [ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="5_rurhu"]
 [ext_resource type="PackedScene" uid="uid://bebdgqjrowu0u" path="res://scenes/game_over.tscn" id="5_y3j0m"]
-[ext_resource type="PackedScene" uid="uid://bsh7fl0o5a8pb" path="res://scenes/heart_bar.tscn" id="6_kk2rg"]
+[ext_resource type="Texture2D" uid="uid://nfdsab71iynd" path="res://assets/sprite/EmptyHeart.png" id="6_kk2rg"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
 b = Vector2(0, 276)
@@ -113,8 +113,31 @@ theme_override_fonts/font = ExtResource("5_rurhu")
 theme_override_font_sizes/font_size = 16
 text = "BEST: 9999m"
 
-[node name="Heart Bar" parent="CanvasLayer/Control" instance=ExtResource("6_kk2rg")]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control"]
 layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.5
+offset_top = 5.0
+offset_right = 23.5
+offset_bottom = 18.0
+grow_horizontal = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_kk2rg")
+stretch_mode = 2
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_kk2rg")
+stretch_mode = 2
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_kk2rg")
+stretch_mode = 2
 
 [node name="Game Over" parent="CanvasLayer" instance=ExtResource("5_y3j0m")]
 visible = false

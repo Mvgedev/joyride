@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsh7fl0o5a8pb"]
+
+[ext_resource type="Texture2D" uid="uid://nfdsab71iynd" path="res://assets/sprite/EmptyHeart.png" id="1_hm6s1"]
+[ext_resource type="Script" uid="uid://dfy06lrvhp8o6" path="res://scenes/heart_bar.gd" id="1_otjmu"]
+
+[node name="Heart Bar" type="HBoxContainer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -23.5
+offset_top = 5.0
+offset_right = 23.5
+offset_bottom = 18.0
+grow_horizontal = 2
+script = ExtResource("1_otjmu")
+
+[node name="Heart1" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_hm6s1")
+stretch_mode = 2
+
+[node name="Heart2" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_hm6s1")
+stretch_mode = 2
+
+[node name="Heart3" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_hm6s1")
+stretch_mode = 2
