@@ -1,0 +1,104 @@
+[gd_scene load_steps=5 format=3 uid="uid://biv5rotsqgc25"]
+
+[ext_resource type="Texture2D" uid="uid://c0arf0y8fsmoh" path="res://assets/sprite/Button_Normal.png" id="1_ekxnf"]
+[ext_resource type="Script" uid="uid://pdjgpudejfch" path="res://scripts/main_menu.gd" id="1_wu84c"]
+[ext_resource type="Texture2D" uid="uid://qjit2o2b8qi1" path="res://assets/sprite/Button_Pressed.png" id="2_bqqt6"]
+[ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="3_bqqt6"]
+
+[node name="Main Menu" type="Node2D"]
+script = ExtResource("1_wu84c")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = 6.0
+offset_right = 24.0
+offset_bottom = 86.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayButton" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_ekxnf")
+texture_pressed = ExtResource("2_bqqt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/PlayButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Infos" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_ekxnf")
+texture_pressed = ExtResource("2_bqqt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/Infos"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+text = "Infos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="TextureButton" parent="CanvasLayer/Control/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_ekxnf")
+texture_pressed = ExtResource("2_bqqt6")
+
+[node name="Label" type="Label" parent="CanvasLayer/Control/VBoxContainer/Settings"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+text = "Options"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -156.0
+offset_top = 50.0
+offset_right = 156.0
+offset_bottom = 89.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_bqqt6")
+theme_override_font_sizes/font_size = 48
+text = "Jetpack Joyride"
+
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]

@@ -131,7 +131,7 @@ animations = [{
 }],
 "loop": false,
 "name": &"Explosion",
-"speed": 10.0
+"speed": 30.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -148,7 +148,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Flying",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -165,7 +165,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Hurricane",
-"speed": 10.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -194,7 +194,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Running",
-"speed": 10.0
+"speed": 20.0
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_56udc"]
@@ -266,7 +266,7 @@ script = ExtResource("1_6r27q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xb3ya")
-animation = &"Explosion"
+animation = &"Running"
 autoplay = "Running"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -283,9 +283,12 @@ shape = SubResource("CircleShape2D_6r27q")
 position = Vector2(0, 13)
 emitting = false
 amount = 20
+speed_scale = 2.0
 emission_shape = 1
-emission_sphere_radius = 3.5
+emission_sphere_radius = 8.0
 spread = 60.0
+scale_amount_min = 3.0
+scale_amount_max = 8.0
 
 [node name="MachineGunRayCast" type="RayCast2D" parent="."]
 enabled = false
