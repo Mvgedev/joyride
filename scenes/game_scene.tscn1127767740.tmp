@@ -1,0 +1,126 @@
+[gd_scene load_steps=10 format=3 uid="uid://k6ipuwviptmf"]
+
+[ext_resource type="Texture2D" uid="uid://c0yng87jdr4hu" path="res://assets/sprite/bg_ground.png" id="1_onqr8"]
+[ext_resource type="PackedScene" uid="uid://bhell6isufwvh" path="res://scenes/player_character.tscn" id="1_w5aja"]
+[ext_resource type="Script" uid="uid://ca4x823pat04k" path="res://scripts/game_manager.gd" id="1_ycayy"]
+[ext_resource type="PackedScene" uid="uid://cg8oyakewarly" path="res://scenes/hazard_manager.tscn" id="2_bw6k5"]
+[ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="5_rurhu"]
+[ext_resource type="PackedScene" uid="uid://bebdgqjrowu0u" path="res://scenes/game_over.tscn" id="5_y3j0m"]
+[ext_resource type="PackedScene" uid="uid://bsh7fl0o5a8pb" path="res://scenes/heart_bar.tscn" id="6_kk2rg"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
+b = Vector2(0, 276)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_w5aja"]
+a = Vector2(-113, 0)
+b = Vector2(714, 0)
+
+[node name="GameScene" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_ycayy")
+
+[node name="HazardManager" parent="GameManager" instance=ExtResource("2_bw6k5")]
+
+[node name="SpawnTimer" type="Timer" parent="GameManager"]
+
+[node name="Landscape" type="Node" parent="."]
+
+[node name="Ground" type="Parallax2D" parent="Landscape"]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(-70, 0)
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Landscape/Ground"]
+position = Vector2(288, 126)
+texture = ExtResource("1_onqr8")
+
+[node name="Borders" type="Node" parent="."]
+
+[node name="BorderLeft" type="Area2D" parent="Borders"]
+position = Vector2(-100, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BorderLeft"]
+shape = SubResource("SegmentShape2D_lxttp")
+
+[node name="BorderRight" type="Area2D" parent="Borders"]
+position = Vector2(700, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/BorderRight"]
+shape = SubResource("SegmentShape2D_lxttp")
+
+[node name="Ground" type="StaticBody2D" parent="Borders"]
+position = Vector2(0, 276)
+collision_layer = 5
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Ground"]
+shape = SubResource("SegmentShape2D_w5aja")
+
+[node name="Ceiling" type="StaticBody2D" parent="Borders"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Borders/Ceiling"]
+shape = SubResource("SegmentShape2D_w5aja")
+
+[node name="Hazards" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(2, 2)
+
+[node name="PlayerCharacter" parent="." instance=ExtResource("1_w5aja")]
+position = Vector2(148, 259)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 0, 0.60784316)
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_right = 0.5
+anchor_bottom = 0.47400004
+offset_bottom = -0.024017334
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Score" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 89.0
+offset_bottom = 18.0
+theme_override_fonts/font = ExtResource("5_rurhu")
+theme_override_font_sizes/font_size = 32
+text = "0000m"
+
+[node name="Best Score" type="Label" parent="CanvasLayer/Control"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 28.0
+offset_right = 89.0
+offset_bottom = 41.0
+theme_override_fonts/font = ExtResource("5_rurhu")
+theme_override_font_sizes/font_size = 16
+text = "BEST: 9999m"
+
+[node name="Heart Bar" parent="CanvasLayer/Control" instance=ExtResource("6_kk2rg")]
+layout_mode = 1
+
+[node name="Game Over" parent="CanvasLayer" instance=ExtResource("5_y3j0m")]
+visible = false
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 0.5
+
+[connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
+[connection signal="area_entered" from="Borders/BorderLeft" to="GameManager" method="_on_border_left_area_entered"]
