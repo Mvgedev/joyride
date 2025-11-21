@@ -1,26 +1,61 @@
-[gd_scene load_steps=7 format=3 uid="uid://glftydw8buuf"]
+[gd_scene load_steps=12 format=3 uid="uid://glftydw8buuf"]
 
-[ext_resource type="Texture2D" uid="uid://xib48otgrg5" path="res://assets/sprite/Zapper.png" id="1_iivta"]
 [ext_resource type="Script" uid="uid://crhomen136pj3" path="res://assets/sprite/zapper.gd" id="1_tgqbo"]
 [ext_resource type="PackedScene" uid="uid://cd1ymsqih0ag7" path="res://scenes/killzone.tscn" id="2_rwb7l"]
+[ext_resource type="Texture2D" uid="uid://jpljjngwresc" path="res://assets/sprite/Zap platform.png" id="2_tgqbo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rwb7l"]
-atlas = ExtResource("1_iivta")
-region = Rect2(0, 0, 64, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_j683x"]
+atlas = ExtResource("2_tgqbo")
+region = Rect2(0, 0, 96, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vqi1j"]
+atlas = ExtResource("2_tgqbo")
+region = Rect2(96, 0, 96, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mgbv"]
+atlas = ExtResource("2_tgqbo")
+region = Rect2(192, 0, 96, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cfpq2"]
+atlas = ExtResource("2_tgqbo")
+region = Rect2(288, 0, 96, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fl85"]
+atlas = ExtResource("2_tgqbo")
+region = Rect2(384, 0, 96, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng15e"]
+atlas = ExtResource("2_tgqbo")
+region = Rect2(480, 0, 96, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tgqbo"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rwb7l")
+"texture": SubResource("AtlasTexture_j683x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vqi1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mgbv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cfpq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fl85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng15e")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tgqbo"]
-size = Vector2(61, 12)
+size = Vector2(86, 12)
 
 [node name="Zapper" type="Node2D"]
 script = ExtResource("1_tgqbo")
@@ -28,10 +63,10 @@ metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_tgqbo")
+autoplay = "default"
 
 [node name="Killzone" parent="." instance=ExtResource("2_rwb7l")]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_tgqbo")
