@@ -10,7 +10,6 @@ func _ready() -> void:
 
 func update_heart(current_health):
 	for i in range(max_hp):
-		print("Value of i: " + str(i))
 		var heart = get_child(i)
 		heart.texture = HEART if i < current_health else EMPTY_HEART
 	pass

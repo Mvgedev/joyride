@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://glftydw8buuf"]
 
-[ext_resource type="Script" uid="uid://crhomen136pj3" path="res://assets/sprite/zapper.gd" id="1_tgqbo"]
+[ext_resource type="Script" uid="uid://crhomen136pj3" path="res://scripts/zapper.gd" id="1_tgqbo"]
 [ext_resource type="PackedScene" uid="uid://cd1ymsqih0ag7" path="res://scenes/killzone.tscn" id="2_rwb7l"]
 [ext_resource type="Texture2D" uid="uid://jpljjngwresc" path="res://assets/sprite/Zap platform.png" id="2_tgqbo"]
 
