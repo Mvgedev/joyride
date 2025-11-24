@@ -22,3 +22,14 @@ func load_score():
 	file.close()
 	if typeof(data) == TYPE_DICTIONARY and data.has("pb_score"):
 		pb_score = data["pb_score"] as int
+
+func get_score_string(val) -> String:
+	var print_score = ""
+	if val < 10:
+		print_score = "000"
+	elif val < 100:
+		print_score = "00"
+	elif val < 1000:
+		print_score = "0"
+	print_score += str(val) + "m"
+	return print_score

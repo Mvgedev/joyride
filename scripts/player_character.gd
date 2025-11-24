@@ -36,10 +36,11 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if machine_gun_ray_cast.is_colliding():
-		var collider : Enemy = machine_gun_ray_cast.get_collider().get_parent()
-		if collider.hit == false:
-			emit_signal("machine_gun_hit", collider)
-			collider.hit = true
+		if  machine_gun_ray_cast.get_collider() != null:
+			var collider = machine_gun_ray_cast.get_collider().get_parent()
+			if collider.hit == false:
+				emit_signal("machine_gun_hit", collider)
+				collider.hit = true
 
 
 

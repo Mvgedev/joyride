@@ -24,3 +24,9 @@ metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_8twbt")
+
+[node name="CountdownToMissile" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="timeout" from="CountdownToMissile" to="." method="_on_countdown_to_missile_timeout"]

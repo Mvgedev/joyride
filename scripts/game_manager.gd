@@ -20,6 +20,7 @@ const EMPTY_HEART = preload("uid://nfdsab71iynd")
 # Scoring
 var time_accumulator = 0 # Cumuled time from delta
 var increment_rate = 5 # Scoring event per second
+var game_ended = false
 
 # Flashing damage
 @onready var color_rect: ColorRect = $"../CanvasLayer/ColorRect"
@@ -31,12 +32,13 @@ var increment_rate = 5 # Scoring event per second
 @onready var hazard_manager: Node = $HazardManager
 var zapper_speed = 70
 var enemy_speed = 110
-var missile_speed = 150
+var missile_speed = 200
 @onready var spawn_timer: Timer = $SpawnTimer
 var spawn_delay = 2.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	ScoreSystem.cur_score = 0
 	update_score()
 	update_pb()
 	game_over.connect("retry", retry)
@@ -56,12 +58,21 @@ func spawn_hazard():
 func rand_hazard() -> Node2D:
 	return null
 
+func shoot_missile(pos_y):
+	var missile = hazard_manager.get_hazard(hazard_manager.HAZARD_TYPE.MISSILE)
+	missile.game_manager = self
+	get_tree().current_scene.get_node("Hazards").call_deferred("add_child", missile)
+	missile.position.x = border_right.position.x
+	missile.position.y = pos_y
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time_accumulator += delta
 	
 	var interval = 1.0 / increment_rate
 	var gained_score = false
+	if game_ended == true:
+		return
 	while time_accumulator >= interval:
 		time_accumulator -= interval
 		gain_score()
@@ -71,7 +82,6 @@ func _process(delta: float) -> void:
 		if ScoreSystem.cur_score % 500 == 0:
 			increase_gamespeed()
 	
-
 
 func damage():
 	var defeated = player_character.damaged()
@@ -98,36 +108,27 @@ func increase_gamespeed():
 func gain_score():
 	ScoreSystem.cur_score += 1
 
-func get_score_string(val) -> String:
-	var print_score = ""
-	if val < 10:
-		print_score = "000"
-	elif val < 100:
-		print_score = "00"
-	elif val < 1000:
-		print_score = "0"
-	print_score += str(val) + "m"
-	return print_score
-
 func update_score():
 	var sc = ScoreSystem.cur_score
-	var print_score = get_score_string(sc)
+	var print_score = ScoreSystem.get_score_string(sc)
 	score.text = print_score
 
 func update_pb():
 	var pb = ScoreSystem.pb_score
-	var print_pb = get_score_string(pb)
+	var print_pb = ScoreSystem.get_score_string(pb)
 	best_score.text = "BEST: " + print_pb
 
 func end_game():
+	game_ended = true
 	player_character.explosion()
 	stop_hazard()
 	stop_parallax()
-	game_over.visible = true
 	if ScoreSystem.cur_score > ScoreSystem.pb_score:
 		ScoreSystem.pb_score = ScoreSystem.cur_score
 		update_pb()
 		ScoreSystem.save_score()
+	game_over.update_gameover()
+	game_over.visible = true
 
 func stop_hazard():
 	spawn_timer.stop()
@@ -140,7 +141,6 @@ func stop_parallax():
 
 func retry():
 	get_tree().reload_current_scene()
-
 
 func update_hp():
 	heart_bar.update_heart(player_character.health)

@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bebdgqjrowu0u"]
+[gd_scene load_steps=5 format=3 uid="uid://bebdgqjrowu0u"]
 
 [ext_resource type="Script" uid="uid://8beobcjvtbry" path="res://scripts/game_over.gd" id="1_racf3"]
-[ext_resource type="Texture2D" uid="uid://dujyb7anuks45" path="res://assets/sprite/UI Box.png" id="1_xeevv"]
-[ext_resource type="Texture2D" uid="uid://c0arf0y8fsmoh" path="res://assets/sprite/Button_Normal.png" id="2_tbwuq"]
+[ext_resource type="Texture2D" uid="uid://bywtlofgeu0cg" path="res://assets/sprite/Popup.png" id="2_racf3"]
 [ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="3_7m3ot"]
-[ext_resource type="Texture2D" uid="uid://qjit2o2b8qi1" path="res://assets/sprite/Button_Pressed.png" id="3_racf3"]
+[ext_resource type="PackedScene" uid="uid://cwj7yqj2tlfyc" path="res://scenes/button.tscn" id="4_7m3ot"]
 
 [node name="Game Over" type="Control"]
 clip_contents = true
@@ -29,7 +28,7 @@ offset_right = 128.0
 offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_xeevv")
+texture = ExtResource("2_racf3")
 
 [node name="Label" type="Label" parent="TextureRect"]
 layout_mode = 1
@@ -37,16 +36,33 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -112.0
-offset_top = 10.0
+offset_top = 15.0
 offset_right = 112.0
-offset_bottom = 65.0
+offset_bottom = 48.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_7m3ot")
-theme_override_font_sizes/font_size = 32
-text = "YOU HAVE BEEN
-DEFEATED"
+theme_override_font_sizes/font_size = 16
+text = "YOU HAVE BEEN DEFEATED"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -81.5
+offset_top = -43.0
+offset_right = 81.5
+offset_bottom = -14.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_7m3ot")
+text = "Your score is: 0000m
+Your best score is: 000m"
+horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
 layout_mode = 1
@@ -55,46 +71,18 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -24.0
-offset_top = -62.0
-offset_right = 24.0
-offset_bottom = -10.0
+offset_left = -65.0
+offset_top = -92.0
+offset_right = 65.0
+offset_bottom = -24.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="TextureButton" type="TextureButton" parent="TextureRect/VBoxContainer"]
+[node name="Retry" parent="TextureRect/VBoxContainer" instance=ExtResource("4_7m3ot")]
 layout_mode = 2
-texture_normal = ExtResource("2_tbwuq")
-texture_pressed = ExtResource("3_racf3")
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/TextureButton"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 43.0
-offset_bottom = 19.0
-theme_override_fonts/font = ExtResource("3_7m3ot")
-theme_override_font_sizes/font_size = 16
-text = "PLAY"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TextureButton2" type="TextureButton" parent="TextureRect/VBoxContainer"]
+[node name="Quit" parent="TextureRect/VBoxContainer" instance=ExtResource("4_7m3ot")]
 layout_mode = 2
-texture_normal = ExtResource("2_tbwuq")
-texture_pressed = ExtResource("3_racf3")
 
-[node name="Label" type="Label" parent="TextureRect/VBoxContainer/TextureButton2"]
-layout_mode = 0
-offset_left = 6.0
-offset_top = 6.0
-offset_right = 43.0
-offset_bottom = 19.0
-theme_override_fonts/font = ExtResource("3_7m3ot")
-theme_override_font_sizes/font_size = 16
-text = "QUIT"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[connection signal="pressed" from="TextureRect/VBoxContainer/TextureButton" to="." method="_on_texture_button_pressed"]
-[connection signal="pressed" from="TextureRect/VBoxContainer/TextureButton2" to="." method="_on_texture_button_2_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Retry" to="." method="_on_retry_pressed"]
+[connection signal="pressed" from="TextureRect/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

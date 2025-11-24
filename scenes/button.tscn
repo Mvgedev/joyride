@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://cwj7yqj2tlfyc"]
+
+[ext_resource type="Texture2D" uid="uid://bnjiuvfud2u3k" path="res://assets/sprite/Buttons.png" id="1_rhj8v"]
+[ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="2_3q610"]
+[ext_resource type="Script" uid="uid://cwck0nw0giswf" path="res://scripts/button.gd" id="2_i7y4x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqqt6"]
+atlas = ExtResource("1_rhj8v")
+region = Rect2(0, 0, 130, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu84c"]
+atlas = ExtResource("1_rhj8v")
+region = Rect2(130, 0, 130, 32)
+
+[node name="Button" type="TextureButton"]
+texture_normal = SubResource("AtlasTexture_bqqt6")
+texture_pressed = SubResource("AtlasTexture_wu84c")
+script = ExtResource("2_i7y4x")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_3q610")
+text = "Label"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="button_down" from="." to="." method="_on_button_down"]
+[connection signal="button_up" from="." to="." method="_on_button_up"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
