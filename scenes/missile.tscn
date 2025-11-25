@@ -24,6 +24,7 @@ radius = 2.0
 height = 28.0
 
 [node name="Missile" type="Node2D"]
+z_index = 3
 script = ExtResource("1_35udt")
 metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 

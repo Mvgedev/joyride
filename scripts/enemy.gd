@@ -4,6 +4,7 @@ class_name Enemy
 var offset_enemy = 10
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var collision_shape_2d: CollisionShape2D = $Killzone/CollisionShape2D
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 
 var hit = false
 
@@ -21,4 +22,5 @@ func _process(delta: float) -> void:
 		position.x -= game_manager.zapper_speed * delta
 
 func die():
+	animated_sprite_2d.stop()
 	animation_player.play("death")

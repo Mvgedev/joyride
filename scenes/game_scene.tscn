@@ -1,12 +1,14 @@
-[gd_scene load_steps=10 format=3 uid="uid://k6ipuwviptmf"]
+[gd_scene load_steps=12 format=3 uid="uid://k6ipuwviptmf"]
 
-[ext_resource type="Texture2D" uid="uid://c0yng87jdr4hu" path="res://assets/sprite/bg_ground.png" id="1_onqr8"]
 [ext_resource type="PackedScene" uid="uid://bhell6isufwvh" path="res://scenes/player_character.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://ca4x823pat04k" path="res://scripts/game_manager.gd" id="1_ycayy"]
 [ext_resource type="PackedScene" uid="uid://cg8oyakewarly" path="res://scenes/hazard_manager.tscn" id="2_bw6k5"]
+[ext_resource type="Texture2D" uid="uid://dke042gue0cb" path="res://assets/sprite/ground_layer1.png" id="3_kk2rg"]
+[ext_resource type="Texture2D" uid="uid://d2e8rx56kr4bc" path="res://assets/sprite/bg_layer2.png" id="4_b5spy"]
 [ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="5_rurhu"]
 [ext_resource type="PackedScene" uid="uid://bebdgqjrowu0u" path="res://scenes/game_over.tscn" id="5_y3j0m"]
 [ext_resource type="PackedScene" uid="uid://bsh7fl0o5a8pb" path="res://scenes/heart_bar.tscn" id="6_kk2rg"]
+[ext_resource type="Texture2D" uid="uid://dwruiopx8w5au" path="res://assets/sprite/bg_layer1.png" id="6_mw25s"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
 b = Vector2(0, 276)
@@ -27,6 +29,26 @@ script = ExtResource("1_ycayy")
 
 [node name="Landscape" type="Node" parent="."]
 
+[node name="Pipes_lights" type="Parallax2D" parent="Landscape"]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(-30, 0)
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Landscape/Pipes_lights"]
+texture = ExtResource("4_b5spy")
+centered = false
+
+[node name="Layer1" type="Parallax2D" parent="Landscape"]
+repeat_size = Vector2(576, 0)
+autoscroll = Vector2(-40, 0)
+follow_viewport = false
+ignore_camera_scroll = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Landscape/Layer1"]
+texture = ExtResource("6_mw25s")
+centered = false
+
 [node name="Ground" type="Parallax2D" parent="Landscape"]
 repeat_size = Vector2(576, 0)
 autoscroll = Vector2(-70, 0)
@@ -34,8 +56,9 @@ follow_viewport = false
 ignore_camera_scroll = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Landscape/Ground"]
-position = Vector2(288, 126)
-texture = ExtResource("1_onqr8")
+position = Vector2(0, -36)
+texture = ExtResource("3_kk2rg")
+centered = false
 
 [node name="Borders" type="Node" parent="."]
 

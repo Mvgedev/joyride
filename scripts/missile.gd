@@ -11,7 +11,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	position.x -= game_manager.missile_speed * delta
+	if hit == false:
+		position.x -= game_manager.missile_speed * delta
+	else:
+		position.x -= game_manager.zapper_speed * delta
 
 func die():
 	print("Should die")
