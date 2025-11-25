@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://5ge2e7wu22vs"]
+[gd_scene load_steps=8 format=3 uid="uid://5ge2e7wu22vs"]
 
 [ext_resource type="Script" uid="uid://dp5g3xfwb2snr" path="res://scripts/missile_warning.gd" id="1_mvnof"]
 [ext_resource type="Texture2D" uid="uid://c32vakutvlyqh" path="res://assets/sprite/Warning.png" id="1_t31tr"]
@@ -18,6 +18,67 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_mvnof"]
+resource_name = "Warning"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.39215687, 0.39215687, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8twbt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rhhcm"]
+_data = {
+&"RESET": SubResource("Animation_8twbt"),
+&"Warning": SubResource("Animation_mvnof")
+}
+
 [node name="Missile Warning" type="Node2D"]
 script = ExtResource("1_mvnof")
 metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
@@ -28,5 +89,11 @@ sprite_frames = SubResource("SpriteFrames_8twbt")
 [node name="CountdownToMissile" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_rhhcm")
+}
+autoplay = "Warning"
 
 [connection signal="timeout" from="CountdownToMissile" to="." method="_on_countdown_to_missile_timeout"]
