@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://k6ipuwviptmf"]
+[gd_scene load_steps=14 format=3 uid="uid://k6ipuwviptmf"]
 
 [ext_resource type="PackedScene" uid="uid://bhell6isufwvh" path="res://scenes/player_character.tscn" id="1_w5aja"]
 [ext_resource type="Script" uid="uid://ca4x823pat04k" path="res://scripts/game_manager.gd" id="1_ycayy"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bebdgqjrowu0u" path="res://scenes/game_over.tscn" id="5_y3j0m"]
 [ext_resource type="PackedScene" uid="uid://bsh7fl0o5a8pb" path="res://scenes/heart_bar.tscn" id="6_kk2rg"]
 [ext_resource type="Texture2D" uid="uid://dwruiopx8w5au" path="res://assets/sprite/bg_layer1.png" id="6_mw25s"]
+[ext_resource type="AudioStream" uid="uid://dh7yn7nwmgvxa" path="res://assets/sounds/gameoversound.wav" id="11_tcjrq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_lxttp"]
 b = Vector2(0, 276)
@@ -169,6 +170,10 @@ visible = false
 anchors_preset = -1
 anchor_right = 0.5
 anchor_bottom = 0.5
+
+[node name="gameover_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_tcjrq")
+bus = &"SFX"
 
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
 [connection signal="area_entered" from="Borders/BorderLeft" to="GameManager" method="_on_border_left_area_entered"]

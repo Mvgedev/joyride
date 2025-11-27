@@ -1,10 +1,12 @@
-[gd_scene load_steps=36 format=3 uid="uid://bhell6isufwvh"]
+[gd_scene load_steps=38 format=3 uid="uid://bhell6isufwvh"]
 
 [ext_resource type="Script" uid="uid://bid8cjmop308g" path="res://scripts/player_character.gd" id="1_6r27q"]
 [ext_resource type="Texture2D" uid="uid://bd72ylgb2toti" path="res://assets/sprite/Character-Sheet.png" id="2_6r27q"]
 [ext_resource type="Texture2D" uid="uid://dh5maoh8ygyb7" path="res://assets/sprite/Character-Flying.png" id="2_kww55"]
 [ext_resource type="Texture2D" uid="uid://cq51um6ya64q" path="res://assets/sprite/Character_hurricane.png" id="3_4h0vy"]
 [ext_resource type="Texture2D" uid="uid://barb4d74t2rla" path="res://assets/sprite/Character_Explosion.png" id="5_uj7mf"]
+[ext_resource type="AudioStream" uid="uid://cnoqf6ti0ulxh" path="res://assets/sounds/stars2.wav" id="6_2vmgx"]
+[ext_resource type="AudioStream" uid="uid://46t0mxryak0c" path="res://assets/sounds/damaged.wav" id="7_6unfe"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qwq0k"]
 atlas = ExtResource("5_uj7mf")
@@ -301,6 +303,14 @@ collide_with_areas = true
 libraries = {
 &"": SubResource("AnimationLibrary_6unfe")
 }
+
+[node name="Stars" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2vmgx")
+bus = &"SFX"
+
+[node name="damage_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_6unfe")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

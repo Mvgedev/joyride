@@ -6,6 +6,8 @@ extends RigidBody2D
 var max_velocity = -300
 var max_downfall = 400
 @onready var gpu_particles_2d: CPUParticles2D = $CPUParticles2D
+@onready var stars: AudioStreamPlayer2D = $Stars
+@onready var damage_sound: AudioStreamPlayer2D = $damage_sound
 
 # MachineGun Handling
 @onready var machine_gun_ray_cast: RayCast2D = $MachineGunRayCast
@@ -58,6 +60,7 @@ func _physics_process(_delta: float) -> void:
 func process_jetpack():
 	var strength = 0
 	if Input.is_action_just_pressed("ui_accept"):
+		stars.play()
 		jetpack = true
 		machine_gun_ray_cast.enabled = true
 		gpu_particles_2d.emitting = true
@@ -65,6 +68,7 @@ func process_jetpack():
 			linear_velocity.y = linear_velocity.y / 2 # Cut down linear velocity for downfall
 		update_anim()
 	elif Input.is_action_just_released("ui_accept"):
+		stars.stop()
 		jetpack = false
 		machine_gun_ray_cast.enabled = false
 		gpu_particles_2d.emitting = false
@@ -85,6 +89,7 @@ func damaged() -> bool:
 		if shield == true:
 			shield = false
 		else:
+			damage_sound.play()
 			health -= 1
 			game_manager.screen_shake()
 		if health < 1:

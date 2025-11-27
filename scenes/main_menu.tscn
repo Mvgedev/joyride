@@ -41,9 +41,6 @@ layout_mode = 2
 [node name="Infos" parent="CanvasLayer/Control/VBoxContainer" instance=ExtResource("4_wu84c")]
 layout_mode = 2
 
-[node name="Settings" parent="CanvasLayer/Control/VBoxContainer" instance=ExtResource("4_wu84c")]
-layout_mode = 2
-
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
 anchors_preset = 5
@@ -75,3 +72,4 @@ theme_override_fonts/font = ExtResource("3_bqqt6")
 text = "Best score: 0000m"
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Infos" to="." method="_on_infos_pressed"]

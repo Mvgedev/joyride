@@ -3,13 +3,11 @@ extends Node2D
 @onready var score: Label = $CanvasLayer/Control/Score
 @onready var play_button: TextureButton = $CanvasLayer/Control/VBoxContainer/PlayButton
 @onready var infos: TextureButton = $CanvasLayer/Control/VBoxContainer/Infos
-@onready var settings: TextureButton = $CanvasLayer/Control/VBoxContainer/Settings
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	play_button.set_text("Play")
 	infos.set_text("How to play")
-	settings.set_text("Settings")
 	update_score()
 
 func update_score():
@@ -20,3 +18,6 @@ func update_score():
 
 func _on_play_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_scene.tscn")
+
+func _on_infos_pressed() -> void:
+	pass # Replace with function body.

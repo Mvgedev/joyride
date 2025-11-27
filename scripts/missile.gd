@@ -1,8 +1,10 @@
 extends Hazard
+class_name Missile
 
 var hit = false
 
 @onready var collision_shape_2d: CollisionShape2D = $Killzone/CollisionShape2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,5 +19,4 @@ func _process(delta: float) -> void:
 		position.x -= game_manager.zapper_speed * delta
 
 func die():
-	print("Should die")
-	queue_free()
+	animation_player.play("Explosion")

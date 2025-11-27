@@ -41,6 +41,7 @@ var missile_speed = 200
 @onready var spawn_timer: Timer = $SpawnTimer
 var spawn_delay = 2.3
 
+@onready var gameover_sound: AudioStreamPlayer2D = $"../gameover_sound"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -129,6 +130,7 @@ func update_pb():
 	best_score.text = "BEST: " + print_pb
 
 func end_game():
+	gameover_sound.play()
 	game_ended = true
 	player_character.explosion()
 	stop_hazard()

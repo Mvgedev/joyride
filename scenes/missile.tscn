@@ -1,27 +1,176 @@
-[gd_scene load_steps=7 format=3 uid="uid://c2ss2gwb88fr"]
+[gd_scene load_steps=15 format=3 uid="uid://c2ss2gwb88fr"]
 
-[ext_resource type="Texture2D" uid="uid://c4vrikhv17vlh" path="res://assets/sprite/Missile.png" id="1_6cx5e"]
 [ext_resource type="Script" uid="uid://cx7x8wkov0f0t" path="res://scripts/missile.gd" id="1_35udt"]
+[ext_resource type="Texture2D" uid="uid://c6u7n723khjqy" path="res://assets/sprite/Missile2-Sheet.png" id="2_2swxv"]
 [ext_resource type="PackedScene" uid="uid://cd1ymsqih0ag7" path="res://scenes/killzone.tscn" id="2_35udt"]
+[ext_resource type="AudioStream" uid="uid://cxl50cnl88ug4" path="res://assets/sounds/explosion.wav" id="4_2swxv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35udt"]
+atlas = ExtResource("2_2swxv")
+region = Rect2(0, 0, 56, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2swxv"]
-atlas = ExtResource("1_6cx5e")
-region = Rect2(0, 0, 32, 16)
+atlas = ExtResource("2_2swxv")
+region = Rect2(56, 0, 56, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bd00w"]
+atlas = ExtResource("2_2swxv")
+region = Rect2(112, 0, 56, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flxc2"]
+atlas = ExtResource("2_2swxv")
+region = Rect2(168, 0, 56, 24)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_bd00w"]
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_35udt")
+}, {
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_2swxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bd00w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flxc2")
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_flxc2"]
-radius = 2.0
-height = 28.0
+radius = 7.0
+height = 48.0
+
+[sub_resource type="Gradient" id="Gradient_35udt"]
+offsets = PackedFloat32Array(0, 0.5511364, 0.75, 0.8806818, 1)
+colors = PackedColorArray(1, 1, 0, 1, 1, 0.9137255, 0, 1, 1, 0.49803922, 0, 1, 1, 0.12156863, 0, 1, 1, 1, 1, 0)
+
+[sub_resource type="Animation" id="Animation_35udt"]
+resource_name = "Explosion"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Killzone/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Explosion:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_2swxv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Killzone/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Explosion:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bd00w"]
+_data = {
+&"Explosion": SubResource("Animation_35udt"),
+&"RESET": SubResource("Animation_2swxv")
+}
 
 [node name="Missile" type="Node2D"]
 z_index = 3
@@ -30,11 +179,40 @@ metadata/_custom_type_script = "uid://cgdi7gm0xukj2"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_bd00w")
+autoplay = "default"
 
 [node name="Killzone" parent="." instance=ExtResource("2_35udt")]
 collision_layer = 9
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+visible = false
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_flxc2")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 150
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 60.0
+initial_velocity_max = 230.0
+scale_amount_min = 1.2
+scale_amount_max = 4.2
+color = Color(1, 0.60784316, 0, 1)
+color_ramp = SubResource("Gradient_35udt")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bd00w")
+}
+
+[node name="Explosion" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_2swxv")
+bus = &"SFX"
