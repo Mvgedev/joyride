@@ -7,6 +7,11 @@ extends Node
 # GUI
 @onready var game_over: Control = $"../CanvasLayer/Game Over"
 @onready var ground: Parallax2D = $"../Landscape/Ground"
+@onready var wall: Parallax2D = $"../Landscape/Wall"
+@onready var pipes_lights: Parallax2D = $"../Landscape/Pipes_lights"
+@onready var shadows: Parallax2D = $"../Landscape/Shadows"
+
+
 @onready var score: Label = $"../CanvasLayer/Control/Score"
 @onready var best_score: Label = $"../CanvasLayer/Control/Best Score"
 
@@ -35,6 +40,7 @@ var enemy_speed = 110
 var missile_speed = 200
 @onready var spawn_timer: Timer = $SpawnTimer
 var spawn_delay = 2.3
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -94,6 +100,10 @@ func increase_gamespeed():
 	increment_rate = increment_rate * 1.25
 	# Parallax speed increase
 	ground.autoscroll = Vector2(ground.autoscroll.x * 1.25, 0.0)
+	wall.autoscroll = Vector2(wall.autoscroll.x * 1.25, 0.0)
+	shadows.autoscroll = Vector2(shadows.autoscroll.x * 1.25, 0.0)
+	pipes_lights.autoscroll = Vector2(pipes_lights.autoscroll.x * 1.25, 0.0)
+	
 	# Hazard speed increase
 	zapper_speed = zapper_speed * 1.25
 	enemy_speed = enemy_speed * 1.25
@@ -138,6 +148,9 @@ func stop_hazard():
 
 func stop_parallax():
 	ground.autoscroll = Vector2(0.0,0.0)
+	wall.autoscroll = Vector2(0.0,0.0)
+	pipes_lights.autoscroll = Vector2(0.0,0.0)
+	shadows.autoscroll = Vector2(0.0,0.0)
 
 func retry():
 	get_tree().reload_current_scene()
