@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://biv5rotsqgc25"]
+[gd_scene load_steps=8 format=3 uid="uid://biv5rotsqgc25"]
 
 [ext_resource type="Script" uid="uid://pdjgpudejfch" path="res://scripts/main_menu.gd" id="1_wu84c"]
+[ext_resource type="Texture2D" uid="uid://dsnfv140jdwf8" path="res://assets/sprite/bg_layer3.png" id="2_8ln24"]
 [ext_resource type="FontFile" uid="uid://dto30w42pjcae" path="res://assets/fonts/PixelSerif_16px_v02.ttf" id="3_bqqt6"]
+[ext_resource type="Texture2D" uid="uid://d2e8rx56kr4bc" path="res://assets/sprite/bg_layer2.png" id="3_rtw2f"]
+[ext_resource type="Texture2D" uid="uid://dwruiopx8w5au" path="res://assets/sprite/bg_layer1.png" id="4_rtw2f"]
 [ext_resource type="PackedScene" uid="uid://cwj7yqj2tlfyc" path="res://scenes/button.tscn" id="4_wu84c"]
+[ext_resource type="Texture2D" uid="uid://dke042gue0cb" path="res://assets/sprite/ground_layer1.png" id="5_oa1go"]
 
 [node name="Main Menu" type="Node2D"]
 script = ExtResource("1_wu84c")
@@ -10,6 +14,26 @@ script = ExtResource("1_wu84c")
 [node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
 zoom = Vector2(2, 2)
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Wall" type="Sprite2D" parent="Node"]
+texture = ExtResource("2_8ln24")
+centered = false
+offset = Vector2(0, -9)
+
+[node name="Pipes" type="Sprite2D" parent="Node"]
+texture = ExtResource("3_rtw2f")
+centered = false
+
+[node name="Shadows" type="Sprite2D" parent="Node"]
+texture = ExtResource("4_rtw2f")
+centered = false
+
+[node name="Ground" type="Sprite2D" parent="Node"]
+position = Vector2(0, -36)
+texture = ExtResource("5_oa1go")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
@@ -28,17 +52,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -24.0
-offset_top = 3.0
-offset_right = 24.0
-offset_bottom = 83.0
+offset_left = -65.0
+offset_top = 41.0
+offset_right = 65.0
+offset_bottom = 121.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PlayButton" parent="CanvasLayer/Control/VBoxContainer" instance=ExtResource("4_wu84c")]
-layout_mode = 2
-
-[node name="Infos" parent="CanvasLayer/Control/VBoxContainer" instance=ExtResource("4_wu84c")]
 layout_mode = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/Control"]
@@ -51,9 +72,11 @@ offset_top = 50.0
 offset_right = 156.0
 offset_bottom = 89.0
 grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 16
 theme_override_fonts/font = ExtResource("3_bqqt6")
 theme_override_font_sizes/font_size = 48
-text = "Jetpack Joyride"
+text = "Escape from Labs"
 
 [node name="Score" type="Label" parent="CanvasLayer/Control"]
 layout_mode = 1
@@ -68,8 +91,8 @@ offset_right = 58.0
 offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("3_bqqt6")
 text = "Best score: 0000m"
 
 [connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/VBoxContainer/Infos" to="." method="_on_infos_pressed"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://5ge2e7wu22vs"]
+[gd_scene load_steps=9 format=3 uid="uid://5ge2e7wu22vs"]
 
 [ext_resource type="Script" uid="uid://dp5g3xfwb2snr" path="res://scripts/missile_warning.gd" id="1_mvnof"]
 [ext_resource type="Texture2D" uid="uid://c32vakutvlyqh" path="res://assets/sprite/Warning.png" id="1_t31tr"]
+[ext_resource type="AudioStream" uid="uid://bq170q7714d2j" path="res://assets/sounds/warning.wav" id="3_8twbt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mvnof"]
 atlas = ExtResource("1_t31tr")
@@ -17,6 +18,45 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="Animation" id="Animation_8twbt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Warning:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_mvnof"]
 resource_name = "Warning"
@@ -45,32 +85,17 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0.39215687, 0.39215687, 1), Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="Animation" id="Animation_8twbt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Warning:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rhhcm"]
@@ -96,5 +121,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_rhhcm")
 }
 autoplay = "Warning"
+
+[node name="Warning" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8twbt")
+bus = &"SFX"
 
 [connection signal="timeout" from="CountdownToMissile" to="." method="_on_countdown_to_missile_timeout"]
