@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b8c058s8yfmdf"]
+
+[ext_resource type="Script" uid="uid://dnye4rlayrb34" path="res://scripts/bgm_player.gd" id="1_wk4np"]
+
+[node name="BGMPlayer" type="Node"]
+script = ExtResource("1_wk4np")
+
+[node name="BGM" type="AudioStreamPlayer2D" parent="."]
+bus = &"BGM"

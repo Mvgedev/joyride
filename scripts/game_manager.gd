@@ -45,6 +45,7 @@ var spawn_delay = 2.3
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	BgmPlayer.play_bgm(BgmPlayer.E_2M_1_TRIBUTE                        )
 	ScoreSystem.cur_score = 0
 	update_score()
 	update_pb()
@@ -173,6 +174,6 @@ func machine_gun_hit(body):
 		body.die()
 
 func _on_spawn_timer_timeout() -> void:
-	print("Timer off!")
 	spawn_hazard()
 	spawn_timer.start(spawn_delay)
+	  

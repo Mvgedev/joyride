@@ -10,14 +10,17 @@ config_version=5
 
 [application]
 
-config/name="joyride"
+config/name="Escape From Labs"
 run/main_scene="uid://biv5rotsqgc25"
 config/features=PackedStringArray("4.5", "Forward Plus")
+boot_splash/show_image=false
+boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
 [autoload]
 
 ScoreSystem="*res://scripts/score_system.gd"
+BgmPlayer="*res://scenes/bgm_player.tscn"
 
 [display]
 
@@ -27,3 +30,5 @@ window/stretch/mode="viewport"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
