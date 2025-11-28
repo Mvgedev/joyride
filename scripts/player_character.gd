@@ -59,7 +59,7 @@ func _physics_process(_delta: float) -> void:
 
 func process_jetpack():
 	var strength = 0
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("jetpack"):
 		stars.play()
 		jetpack = true
 		machine_gun_ray_cast.enabled = true
@@ -67,7 +67,7 @@ func process_jetpack():
 		if linear_velocity.y > 70:
 			linear_velocity.y = linear_velocity.y / 2 # Cut down linear velocity for downfall
 		update_anim()
-	elif Input.is_action_just_released("ui_accept"):
+	elif Input.is_action_just_released("jetpack"):
 		stars.stop()
 		jetpack = false
 		machine_gun_ray_cast.enabled = false
@@ -75,7 +75,7 @@ func process_jetpack():
 		if linear_velocity.y < -70:
 			linear_velocity.y = linear_velocity.y / 2
 		update_anim()
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed("jetpack"):
 		if linear_velocity.y > max_velocity:
 			strength = -650
 	apply_force(Vector2(0, strength))
